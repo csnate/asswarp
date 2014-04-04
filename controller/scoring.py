@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 import time
-#import RPi.GPIO as GPIO
 import spidev
- 
-#GPIO.setmode(GPIO.BCM)
-#DEBUG = 1
+import urllib2
 
+# spidev setup
 spi = spidev.SpiDev()
 spi.open(0,0)
     
@@ -29,27 +27,22 @@ def get_adc(channel):
     ret = ((r[1]&31) << 6) + (r[2] >> 2)
     return ret
  
-
-# change these as desired - they're the pins connected from the
-# SPI port on the ADC to the Cobbler
-#SPICLK = 18
-#SPIMISO = 23
-#SPIMOSI = 24
-#SPICS = 25
- 
-# set up the SPI interface pins
-#GPIO.setup(SPIMOSI, GPIO.OUT)
-#GPIO.setup(SPIMISO, GPIO.IN)
-#GPIO.setup(SPICLK, GPIO.OUT)
-#GPIO.setup(SPICS, GPIO.OUT)
- 
+def send_goal(team):
+    data = {"type": "goal", "team": team }
+    url_data = urllib2.urlencode(data)
+    req = urllib2.Request(scoring_url, data)
+    resp = urllib2.urlopen(req).read()
+    print "[DEBUG] Resp: ", resp
+    
 # Vibration Sensor #1 attached to #adc0, Sensor #2 attached to adc#1
-team_1 = 0
-team_2 = 1
+team_1 = 0 # BLACK team
+team_2 = 1 # YELLOW team
  
 # tolerance levels
 team_1_tolerance = 30
 team_2_tolerance = 50
+
+scoring_url = "http://10.60.3.155:8080/goal/"
 
 try:
             
@@ -62,10 +55,12 @@ try:
          #if DEBUG:
          if team_1_read > team_1_tolerance:
              print "[DEBUG] TEAM 1: ", team_1_read
+             send_goal("black")
              time.sleep(1)
              
          if team_2_read > team_2_tolerance:
              print "[DEBUG] TEAM 2: ", team_2_read
+             send_goal("yellow")
              time.sleep(1)
     
          time.sleep(0.01)
