@@ -61,49 +61,50 @@ team_2 = 1;
 #last_read = 0       # this keeps track of the last potentiometer value
 tolerance = 5       # to keep from being jittery we'll only change
                     # volume when the pot has moved more than 5 'counts'
- 
-while True:
-        # we'll assume that the pot didn't move
-        #trim_pot_changed = False
- 
-        try:
+
+try:
             
-            # read the analog pin
-            team_1_read = readadc(team_1, SPICLK, SPIMOSI, SPIMISO, SPICS)
-            team_2_read = readadc(team_2, SPICLK, SPIMOSI, SPIMISO, SPICS)
-            
-            # how much has it changed since the last read?
-            #pot_adjust = abs(trim_pot - last_read)
+     while True:
+     # we'll assume that the pot didn't move
+     #trim_pot_changed = False
+    
      
-            #if DEBUG:
-            print "team_1_read:", team_1_read
-            print "team_2_read:", team_2_read
-     
-        #if ( team_1_read > tolerance ):
-        #       trim_pot_changed = True
- 
-        #if DEBUG:
-        #        print "trim_pot_changed", trim_pot_changed
- 
-        #if ( trim_pot_changed ):
-        #set_volume = trim_pot / 10.24           # convert 10bit adc0 (0-1024) trim pot read into 0-100 volume level
-        #set_volume = round(set_volume)          # round out decimal value
-        #set_volume = int(set_volume)            # cast volume as integer
-
-        #print 'Volume = {volume}%' .format(volume = set_volume)
-        #set_vol_cmd = 'sudo amixer cset numid=1 -- {volume}% > /dev/null' .format(volume = set_volume)
-        #os.system(set_vol_cmd)  # set volume
-
-        #if DEBUG:
-        #       print "set_volume", set_volume
-        #       print "tri_pot_changed", set_volume
-
-       # save the potentiometer reading for the next loop
-        #last_read = trim_pot
- 
-        # hang out and do nothing for a half second
-            time.sleep(0.5)
-        except:
-            print "Exception occured";
-        finally:
-            GPIO.cleanup()
+         # read the analog pin
+         team_1_read = readadc(team_1, SPICLK, SPIMOSI, SPIMISO, SPICS)
+         team_2_read = readadc(team_2, SPICLK, SPIMOSI, SPIMISO, SPICS)
+         
+         # how much has it changed since the last read?
+         #pot_adjust = abs(trim_pot - last_read)
+    
+         #if DEBUG:
+         print "team_1_read:", team_1_read
+         print "team_2_read:", team_2_read
+    
+     #if ( team_1_read > tolerance ):
+     #       trim_pot_changed = True
+    
+     #if DEBUG:
+     #        print "trim_pot_changed", trim_pot_changed
+    
+     #if ( trim_pot_changed ):
+     #set_volume = trim_pot / 10.24           # convert 10bit adc0 (0-1024) trim pot read into 0-100 volume level
+     #set_volume = round(set_volume)          # round out decimal value
+     #set_volume = int(set_volume)            # cast volume as integer
+    
+     #print 'Volume = {volume}%' .format(volume = set_volume)
+     #set_vol_cmd = 'sudo amixer cset numid=1 -- {volume}% > /dev/null' .format(volume = set_volume)
+     #os.system(set_vol_cmd)  # set volume
+    
+     #if DEBUG:
+     #       print "set_volume", set_volume
+     #       print "tri_pot_changed", set_volume
+    
+    # save the potentiometer reading for the next loop
+     #last_read = trim_pot
+    
+     # hang out and do nothing for a half second
+         time.sleep(0.5)
+except:
+    print "Exception occured";
+finally:
+    GPIO.cleanup()
