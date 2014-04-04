@@ -41,10 +41,10 @@ def send_goal(team):
     url_data = urllib.urlencode(data)
     req = urllib2.Request(scoring_url, url_data)
     resp = urllib2.urlopen(req).read()
-    lit_resp = ast.literal_eval(resp)
-    score = int(lit_resp['score'])
-    if score >= 5:
-        register_teams()
+    #lit_resp = ast.literal_eval(resp)
+    #score = int(lit_resp['score'])
+    #if score >= 5:
+        #register_teams()
     
 def register_teams():
     data = "curl -X POST -H \"Content-Type: application/json\" -d '[{\"name\": \"black\",\"members\": [] }, {\"name\": \"yellow\",\"members\": [] }]' http://10.60.3.155:8080/teams/"
@@ -64,7 +64,7 @@ register_url = "http://10.60.3.155:8080/teams/"
 try:
      
      # Register the teams
-     register_teams()
+     #register_teams()
                  
      while True:
 
