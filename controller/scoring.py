@@ -82,8 +82,8 @@ team_1 = 0;
 team_2 = 1;
  
 #last_read = 0       # this keeps track of the last potentiometer value
-tolerance = 20       # to keep from being jittery we'll only change
-                    # volume when the pot has moved more than 5 'counts'
+team_1_tolerance = 20           # to keep from being jittery we'll only change
+team_2_tolerance = 40                    # volume when the pot has moved more than 5 'counts'
 
 try:
             
@@ -102,9 +102,9 @@ try:
          #pot_adjust = abs(trim_pot - last_read)
     
          #if DEBUG:
-         if team_1_read > tolerance:
+         if team_1_read > team_1_tolerance:
              print "team_1_read:", team_1_read
-         if team_2_read > tolerance:
+         if team_2_read > team_2_tolerance:
              print "team_2_read:", team_2_read
     
      #if ( team_1_read > tolerance ):
