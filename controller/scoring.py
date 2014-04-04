@@ -82,7 +82,7 @@ team_1 = 0;
 team_2 = 1;
  
 #last_read = 0       # this keeps track of the last potentiometer value
-tolerance = 10       # to keep from being jittery we'll only change
+tolerance = 20       # to keep from being jittery we'll only change
                     # volume when the pot has moved more than 5 'counts'
 
 try:
@@ -130,7 +130,7 @@ try:
      #last_read = trim_pot
     
      # hang out and do nothing for a half second
-         time.sleep(0.2)
+         time.sleep(0.1)
 except:
     print "Exception occured";
 finally:
