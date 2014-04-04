@@ -82,8 +82,11 @@ team_1 = 0;
 team_2 = 1;
  
 #last_read = 0       # this keeps track of the last potentiometer value
-team_1_tolerance = 20           # to keep from being jittery we'll only change
-team_2_tolerance = 40                    # volume when the pot has moved more than 5 'counts'
+team_1_tolerance = 20;           # to keep from being jittery we'll only change
+team_2_tolerance = 40;                    # volume when the pot has moved more than 5 'counts'
+
+team_1_score = 0;
+team_2_score = 0;
 
 try:
             
@@ -103,9 +106,20 @@ try:
     
          #if DEBUG:
          if team_1_read > team_1_tolerance:
-             print "team_1_read:", team_1_read
+             print "[DEBUG] TEAM 1: ", team_1_read
+             team_1_score = team_1_score + 1
+             print "SCORE: Team 1: ", team_1_score, " :: Team 2: ", team_2_score
          if team_2_read > team_2_tolerance:
-             print "team_2_read:", team_2_read
+             print "[DEBUG] TEAM 2: ", team_2_read
+             team_2_score = team_2_score + 1
+             print "SCORE: Team 1: ", team_1_score, " :: Team 2: ", team_2_score
+         if team_1_score > 4 or team_2_score > 4:
+             if team_1_score > 4:
+                 print "----------  TEAM 1 WINS! ---------"
+             elif team_2_score > 4:
+                 print "----------  TEAM 2 WINS! ---------"
+             team_1_score = 0
+             team_2_score = 0
     
      #if ( team_1_read > tolerance ):
      #       trim_pot_changed = True
