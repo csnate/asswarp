@@ -1,0 +1,55 @@
+html {
+height:100%;
+width:100%;
+}
+body {
+margin: 0;
+padding: 0;
+background: grey;
+color: white;
+font-family: Tahoma, Geneva, sans-serif;
+font-size: 24px;
+height:100%;
+width:100%;
+min-width:800px;
+min-height:500px;
+}
+.splitflap {
+margin: 20px auto;
+-webkit-perspective-origin: top center;
+-moz-perspective-origin: top center;
+-ms-perspective-origin: top center;
+perspective-origin: top center;
+-webkit-perspective: 900px;
+-moz-perspective: 900px;
+-ms-perspective: 900px;
+perspective: 900px;
+}
+.splitflap .char {
+-webkit-transform-style: preserve-3d;
+-moz-transform-style: preserve-3d;
+-ms-transform-style: preserve-3d;
+transform-style: preserve-3d;
+}
+
+table {
+	width:900px;
+	display:block;
+	margin-top:-350px;
+	margin-left:-450px;
+	position:absolute;
+	top:50%;
+	left:50%;
+}
+
+td {
+	width:450px;
+	text-align:center;
+}
+
+
+h2 {
+	font-size:60px;
+	margin-bottom:10px;
+	padding-bottom:0px;
+}
