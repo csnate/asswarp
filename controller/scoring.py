@@ -68,12 +68,12 @@ try:
          #if DEBUG:
          if team_1_read > team_1_tolerance:
              print "[DEBUG] TEAM 1: ", team_1_read
-             #resp1 = send_goal("black")
+             send_goal("black")
              time.sleep(2)
              
          if team_2_read > team_2_tolerance:
              print "[DEBUG] TEAM 2: ", team_2_read
-             #resp2 = send_goal("yellow")
+             send_goal("yellow")
              time.sleep(2)
     
          time.sleep(0.1)
