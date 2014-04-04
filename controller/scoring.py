@@ -3,6 +3,10 @@ import time
 import sys
 import os
 import spidev
+import ast
+import urllib
+import urllib2
+
 
 # spidev setup
 spi = spidev.SpiDev()
@@ -29,9 +33,21 @@ def get_adc(channel):
     return ret
  
 def send_goal(team):
-    data = "curl -X POST -H \"Content-Type: application/json\" -d '{\"type\": \"goal\",\"team\": \""
-    data = data + team
-    data = data + "\"}' http://10.60.3.155:8080/goal/"
+    
+    #data = "curl -X POST -H \"Content-Type: application/json\" -d '{\"type\": \"goal\",\"team\": \""
+    #data = data + team
+    #data = data + "\"}' http://10.60.3.155:8080/goal/"
+    data = { "type": "goal", "team": team }
+    url_data = urllib.urlencode(data)
+    req = urllib2.Request(scoring_url, url_data)
+    resp = urllib2.urlopen(req).read()
+    lit_resp = ast.literal_eval(resp)
+    score = int(lit_resp['score'])
+    if score >= 5:
+        register_teams()
+    
+def register_teams():
+    data = "curl -X POST -H \"Content-Type: application/json\" -d '[{\"name\": \"black\",\"members\": [] }, {\"name\": \"yellow\",\"members\": [] }]' http://10.60.3.155:8080/teams/"
     os.system(data)
     
 # Vibration Sensor #1 attached to #adc0, Sensor #2 attached to adc#1
@@ -39,13 +55,17 @@ team_1 = 0 # BLACK team
 team_2 = 1 # YELLOW team
  
 # tolerance levels
-team_1_tolerance = 200
+team_1_tolerance = 100
 team_2_tolerance = 100
 
 scoring_url = "http://10.60.3.155:8080/goal/"
+register_url = "http://10.60.3.155:8080/teams/"
 
 try:
-            
+     
+     # Register the teams
+     register_teams()
+                 
      while True:
 
          # read the analog pin
@@ -56,14 +76,14 @@ try:
          if team_1_read > team_1_tolerance:
              print "[DEBUG] TEAM 1: ", team_1_read
              send_goal("black")
-             time.sleep(1)
+             time.sleep(2)
              
          if team_2_read > team_2_tolerance:
              print "[DEBUG] TEAM 2: ", team_2_read
              send_goal("yellow")
-             time.sleep(1)
+             time.sleep(2)
     
-         time.sleep(0.01)
+         time.sleep(0.1)
 except:
     print "Exception occurred - ", sys.exc_info()[0]
     
