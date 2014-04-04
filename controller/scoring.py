@@ -39,8 +39,8 @@ team_1 = 0 # BLACK team
 team_2 = 1 # YELLOW team
  
 # tolerance levels
-team_1_tolerance = 50
-team_2_tolerance = 50
+team_1_tolerance = 100
+team_2_tolerance = 100
 
 scoring_url = "http://10.60.3.155:8080/goal/"
 
