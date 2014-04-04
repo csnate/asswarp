@@ -1,14 +1,42 @@
-var express = require('express'),
-	app = express(),
-	http = require("http").createServer(app),
-  	io = require("socket.io").listen(http),
-	_ = require("underscore");
+/*
+ Module dependencies:
+
+ - Express
+ - Http (to run Express)
+ - Underscore (because it's cool)
+ - Socket.IO
+
+ It is a common practice to name the variables after the module name.
+ Ex: http is the "http" module, express is the "express" module, etc.
+ The only exception is Underscore, where we use, conveniently, an
+ underscore. Oh, and "socket.io" is simply called io. Seriously, the
+ rest should be named after its module name.
+
+ */
+var express = require("express")
+  , app = express()
+  , http = require("http").createServer(app)
+  , io = require("socket.io").listen(http)
+  , _ = require("underscore");
+
+/*
+ The list of participants in our chatroom.
+ The format of each participant will be:
+ {
+ id: "sessionId",
+ name: "participantName"
+ }
+ */
+var participants = [];
+
+/* Server config */
 
 //Server's IP address
 app.set("ipaddr", "10.60.3.155");
+//app.set("ipaddr", "127.0.0.1");
 
 //Server's port number
-app.set("port", 8080);
+app.set("port", 8081);
 
 //Specify the views folder
 app.set("views", __dirname + "/views");
@@ -22,14 +50,15 @@ app.use(express.static("public", __dirname + "/public"));
 //Tells server to support JSON, urlencoded, and multipart requests
 app.use(express.bodyParser());
 
-//default routing
+/* Server routing */
+
+//Handle route "GET /", as in "http://localhost:8080/"
 app.get("/", function(request, response) {
 
   //Render the view called "index"
   response.render("index");
 
 });
-
 
 //teams
 var teams = [],
@@ -98,6 +127,9 @@ app.post("/goal", function(req, res){
 	var t = _.detect(scores, function (obj) {return obj.team === team;});;
 	t.score += 1;
 	
+	//Let our scoreboard know that teams have signed in
+  	io.sockets.emit("goal", {team: team, goals: t.score});
+	
 	res.json(t);
 	
 });
@@ -107,23 +139,14 @@ app.get("/scoreboard", function(req, res) {
 	res.json(scores);	
 });
 
-
 /* Socket.IO events */
 io.on("connection", function(socket){
 
-  /*
-   When a client disconnects from the server, the event "disconnect" is automatically
-   captured by the server. It will then emit an event called "userDisconnected" to
-   all participants with the id of the client that disconnected
-   */
-  socket.on("connect", function() {
-    
-  });
+  
 
 });
 
-
 //Start the http server at port and IP defined before
-app.listen(app.get("port"), function() {
+http.listen(app.get("port"), app.get("ipaddr"), function() {
   console.log("Server up and running. Go to http://" + app.get("ipaddr") + ":" + app.get("port"));
 });
