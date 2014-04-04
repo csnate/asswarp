@@ -48,7 +48,7 @@ team_1 = 0
 team_2 = 1
  
 # tolerance levels
-team_1_tolerance = 50
+team_1_tolerance = 30
 team_2_tolerance = 50
 
 try:
@@ -66,6 +66,6 @@ try:
          if team_2_read > team_2_tolerance:
              print "[DEBUG] TEAM 2: ", team_2_read
     
-         time.sleep(0.1)
+         time.sleep(0.2)
 except:
     print "Exception occurred"
