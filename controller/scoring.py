@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 import time
 import sys
+import os
 import spidev
-import urllib
-import urllib2
 
 # spidev setup
 spi = spidev.SpiDev()
@@ -30,11 +29,10 @@ def get_adc(channel):
     return ret
  
 def send_goal(team):
-    data = {"type": "goal", "team": team }
-    url_data = urllib.urlencode(data)
-    req = urllib2.Request(scoring_url, data)
-    resp = urllib2.urlopen(req).read()
-    print "[DEBUG] Resp: ", resp
+    data = "curl -X POST -H \"Content-Type: application/json\" -d '{\"type\": \"goal\",\"team\": \""
+    data = data + team
+    data = data + "\"}' http://10.60.3.155:8080/goal/"
+    os.system(data)
     
 # Vibration Sensor #1 attached to #adc0, Sensor #2 attached to adc#1
 team_1 = 0 # BLACK team
