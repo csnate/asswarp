@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import time
-import os
 import RPi.GPIO as GPIO
  
 GPIO.setmode(GPIO.BCM)
@@ -8,8 +7,8 @@ DEBUG = 1
  
 # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
 def readadc(adcnum, clockpin, mosipin, misopin, cspin):
-        if ((adcnum > 1) or (adcnum < 0)):
-                return 0
+        #if ((adcnum > 1) or (adcnum < 0)):
+        #        return 0
         GPIO.output(cspin, True)
  
         GPIO.output(clockpin, False)  # start clock low
@@ -70,14 +69,14 @@ try:
     
      
          # read the analog pin
-         team_1_read = readadc(team_1, SPICLK, SPIMOSI, SPIMISO, SPICS)
+         #team_1_read = readadc(team_1, SPICLK, SPIMOSI, SPIMISO, SPICS)
          team_2_read = readadc(team_2, SPICLK, SPIMOSI, SPIMISO, SPICS)
          
          # how much has it changed since the last read?
          #pot_adjust = abs(trim_pot - last_read)
     
          #if DEBUG:
-         print "team_1_read:", team_1_read
+         #print "team_1_read:", team_1_read
          print "team_2_read:", team_2_read
     
      #if ( team_1_read > tolerance ):
