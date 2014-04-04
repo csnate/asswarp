@@ -34,10 +34,13 @@ def get_adc(channel):
  
 def send_goal(team):
     
-    data = "curl -X POST -H \"Content-Type: application/json\" -d '{\"type\": \"goal\",\"team\": \""
-    data = data + team
-    data = data + "\"}' http://10.60.3.155:8080/goal/"
-    resp = os.system(data)
+    #data = "curl -X POST -H \"Content-Type: application/json\" -d '{\"type\": \"goal\",\"team\": \""
+    #data = data + team
+    #data = data + "\"}' http://10.60.3.155:8080/goal/"
+    data = { "type": "goal", "team": team }
+    url_data = urllib.urlencode(data)
+    req = urllib2.Request(scoring_url, url_data)
+    resp = urllib2.urlopen(req).read()
     lit_resp = ast.literal_eval(resp)
     score = int(lit_resp['score'])
     if score >= 5:
