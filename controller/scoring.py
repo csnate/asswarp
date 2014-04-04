@@ -3,6 +3,10 @@ import time
 import sys
 import os
 import spidev
+import ast
+import urllib
+import urllib2
+
 
 # spidev setup
 spi = spidev.SpiDev()
@@ -29,9 +33,14 @@ def get_adc(channel):
     return ret
  
 def send_goal(team):
+    
     data = "curl -X POST -H \"Content-Type: application/json\" -d '{\"type\": \"goal\",\"team\": \""
     data = data + team
     data = data + "\"}' http://10.60.3.155:8080/goal/"
+    os.system(data)
+    
+def register_teams():
+    data = "curl -X POST -H \"Content-Type: application/json\" -d '[{\"name\": \"black\",\"members\": [] }, {\"name\": \"yellow\",\"members\": [] }]' http://10.60.3.155:8080/teams/"
     os.system(data)
     
 # Vibration Sensor #1 attached to #adc0, Sensor #2 attached to adc#1
@@ -39,13 +48,17 @@ team_1 = 0 # BLACK team
 team_2 = 1 # YELLOW team
  
 # tolerance levels
-team_1_tolerance = 200
+team_1_tolerance = 100
 team_2_tolerance = 100
 
 scoring_url = "http://10.60.3.155:8080/goal/"
+register_url = "http://10.60.3.155:8080/teams/"
 
 try:
-            
+     
+     # Register the teams
+     register_teams()
+                 
      while True:
 
          # read the analog pin
@@ -55,12 +68,12 @@ try:
          #if DEBUG:
          if team_1_read > team_1_tolerance:
              print "[DEBUG] TEAM 1: ", team_1_read
-             send_goal("black")
+             #resp1 = send_goal("black")
              time.sleep(2)
              
          if team_2_read > team_2_tolerance:
              print "[DEBUG] TEAM 2: ", team_2_read
-             send_goal("yellow")
+             #resp2 = send_goal("yellow")
              time.sleep(2)
     
          time.sleep(0.1)
