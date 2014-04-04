@@ -37,7 +37,10 @@ def send_goal(team):
     data = "curl -X POST -H \"Content-Type: application/json\" -d '{\"type\": \"goal\",\"team\": \""
     data = data + team
     data = data + "\"}' http://10.60.3.155:8080/goal/"
-    os.system(data)
+    resp = os.system(data)
+    lit_resp = ast.literal_eval(resp)
+    if lit_resp['score'] >= 5:
+        register_teams()
     
 def register_teams():
     data = "curl -X POST -H \"Content-Type: application/json\" -d '[{\"name\": \"black\",\"members\": [] }, {\"name\": \"yellow\",\"members\": [] }]' http://10.60.3.155:8080/teams/"
