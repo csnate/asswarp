@@ -2,6 +2,7 @@
 import time
 import sys
 import spidev
+import urllib
 import urllib2
 
 # spidev setup
@@ -30,7 +31,7 @@ def get_adc(channel):
  
 def send_goal(team):
     data = {"type": "goal", "team": team }
-    url_data = urllib2.urlencode(data)
+    url_data = urllib.urlencode(data)
     req = urllib2.Request(scoring_url, data)
     resp = urllib2.urlopen(req).read()
     print "[DEBUG] Resp: ", resp
