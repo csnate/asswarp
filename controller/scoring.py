@@ -128,7 +128,7 @@ try:
      #last_read = trim_pot
     
      # hang out and do nothing for a half second
-         time.sleep(0.5)
+         time.sleep(0.1)
 except:
     print "Exception occured";
 finally:
