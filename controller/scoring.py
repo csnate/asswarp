@@ -62,10 +62,16 @@ try:
          #if DEBUG:
          if team_1_read > team_1_tolerance:
              print "[DEBUG] TEAM 1: ", team_1_read
+             time.sleep(0.5)
              
          if team_2_read > team_2_tolerance:
              print "[DEBUG] TEAM 2: ", team_2_read
+             time.sleep(0.5)
     
-         time.sleep(0.2)
+         time.sleep(0.01)
 except:
     print "Exception occurred"
+    
+    
+    
+    
