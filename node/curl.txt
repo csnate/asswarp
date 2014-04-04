@@ -1,0 +1,4 @@
+//curl post commands to the api
+
+curl -X POST -H "Content-Type: application/json" -d '[{"name": "Amigos","members": ["Nate","Gautam"] }, {"name": "Sharks","members": ["Viktar","Satya"] }]' http://10.60.3.155:8080/teams/
+curl -X POST -H "Content-Type: application/json" -d '{"type": "goal","team": "Amigos","time": ""   }' http://10.60.3.155:8080/goal/
