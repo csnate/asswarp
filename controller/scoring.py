@@ -44,6 +44,7 @@ def send_goal(team):
     lit_resp = ast.literal_eval(resp)
     score = int(lit_resp['score'])
     if score >= 5:
+        time.sleep(10)
         register_teams()
     
 def register_teams():
