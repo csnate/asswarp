@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import time
+import sys
 import spidev
 import urllib2
 
@@ -65,7 +66,7 @@ try:
     
          time.sleep(0.01)
 except:
-    print "Exception occurred"
+    print "Exception occurred - ", sys.exc_info()[0]
     
     
     
