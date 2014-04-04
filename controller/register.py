@@ -2,17 +2,23 @@
 import serial
 import time
 
-def readline(port):
-    rv = ""
-    while True:
-        ch = port.read()
-        rv += ch
-        if ch=='\r' or ch=='':
-            return rv
+port = serial.Serial()
+port.baudrate = 9600
+port.port = "/dev/ttyAMA0"
+port.timeout = 0.1
+port.open()
 
-port = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=30.0)
+cards = [
+         '0C003375F5BF',    # BLUE
+]
+
+if port.isOpen():
+        print "Port is open: ", port.portstr
 
 while True:
-    port.write("\r\nSay something:")
-    rcv = readlineCR(port)
-    port.write("\r\nYou sent:" + repr(rcv))
+        port.flushInput()
+        data = port.readline().strip()
+        if len(data) > 0:
+                rfidData = data[1:13]
+                print "Card scanned: ", rfidData
+                

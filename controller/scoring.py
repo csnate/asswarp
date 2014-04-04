@@ -56,14 +56,14 @@ try:
          if team_1_read > team_1_tolerance:
              print "[DEBUG] TEAM 1: ", team_1_read
              send_goal("black")
-             time.sleep(1)
+             time.sleep(2)
              
          if team_2_read > team_2_tolerance:
              print "[DEBUG] TEAM 2: ", team_2_read
              send_goal("yellow")
-             time.sleep(1)
+             time.sleep(2)
     
-         time.sleep(0.01)
+         time.sleep(0.1)
 except:
     print "Exception occurred - ", sys.exc_info()[0]
     
