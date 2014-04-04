@@ -82,7 +82,7 @@ team_1 = 0;
 team_2 = 1;
  
 #last_read = 0       # this keeps track of the last potentiometer value
-team_1_tolerance = 20;           # to keep from being jittery we'll only change
+team_1_tolerance = 30;           # to keep from being jittery we'll only change
 team_2_tolerance = 40;                    # volume when the pot has moved more than 5 'counts'
 
 team_1_score = 0;
