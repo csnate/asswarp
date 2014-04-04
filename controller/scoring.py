@@ -39,7 +39,8 @@ def send_goal(team):
     data = data + "\"}' http://10.60.3.155:8080/goal/"
     resp = os.system(data)
     lit_resp = ast.literal_eval(resp)
-    if lit_resp['score'] >= 5:
+    score = int(lit_resp['score'])
+    if score >= 5:
         register_teams()
     
 def register_teams():
