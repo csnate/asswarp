@@ -66,17 +66,19 @@ while True:
         # we'll assume that the pot didn't move
         #trim_pot_changed = False
  
-        # read the analog pin
-        team_1_read = readadc(team_1, SPICLK, SPIMOSI, SPIMISO, SPICS)
-        team_2_read = readadc(team_2, SPICLK, SPIMOSI, SPIMISO, SPICS)
-        
-        # how much has it changed since the last read?
-        #pot_adjust = abs(trim_pot - last_read)
- 
-        #if DEBUG:
-        print "team_1_read:", team_1_read
-        print "team_2_read:", team_2_read
- 
+        try:
+            
+            # read the analog pin
+            team_1_read = readadc(team_1, SPICLK, SPIMOSI, SPIMISO, SPICS)
+            team_2_read = readadc(team_2, SPICLK, SPIMOSI, SPIMISO, SPICS)
+            
+            # how much has it changed since the last read?
+            #pot_adjust = abs(trim_pot - last_read)
+     
+            #if DEBUG:
+            print "team_1_read:", team_1_read
+            print "team_2_read:", team_2_read
+     
         #if ( team_1_read > tolerance ):
         #       trim_pot_changed = True
  
@@ -100,4 +102,8 @@ while True:
         #last_read = trim_pot
  
         # hang out and do nothing for a half second
-        time.sleep(0.5)
+            time.sleep(0.5)
+        except:
+            print "Exception occured";
+        finally:
+            GPIO.cleanup()
