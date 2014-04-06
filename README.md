@@ -20,10 +20,10 @@ This image (taken from [Reading from a MCP3002 analog-to-digital converter](http
 
 <table>
 	<thead>
-		<th>
-			<td style="background-color:#aaa">ADC</td>
-			<td style="background-color:#aaa">RPi</td>
-		</th>
+		<tr>
+			<th style="background-color:#aaa">ADC</th>
+			<th style="background-color:#aaa">RPi</th>
+		</tr>
 	</thead>
 	<tbody>
 		<tr>
