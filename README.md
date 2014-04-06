@@ -20,7 +20,7 @@ This image (taken from [Reading from a MCP3002 analog-to-digital converter](http
 
 <table>
 	<thead>
-		<tr>
+		<th>
 			<td style="background-color:#aaa">ADC</td>
 			<td style="background-color:#aaa">RPi</td>
 		</th>
