@@ -36,7 +36,7 @@ app.set("ipaddr", "10.60.3.155");
 //app.set("ipaddr", "127.0.0.1");
 
 //Server's port number
-app.set("port", 8081);
+app.set("port", 8080);
 
 //Specify the views folder
 app.set("views", __dirname + "/views");
@@ -129,6 +129,10 @@ app.post("/goal", function(req, res){
 	
 	//Let our scoreboard know that teams have signed in
   	io.sockets.emit("goal", {team: team, goals: t.score});
+	
+	if(t.score >= 5){
+		io.sockets.emit("win", {team: team});
+	}
 	
 	res.json(t);
 	

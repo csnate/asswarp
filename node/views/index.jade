@@ -1,20 +1,25 @@
 doctype html
 html
   head
+    link(rel='stylesheet', href='/css/layout.css')
     script(src='/js/socket.io.min.js')
     script(src='/js/jquery-1.9.1.min.js')
     script(src='/js/index.js')
-    title ASSWARP SCOREBOARD
+    script(src='/js/Core.js')
+    script(src='/js/jquery.splitflap.js')
+    script(src='/js/main.js')
   body
-    h1 ASSWARP SCOREBOARD
-    div
-      div.inlineBlock
-        span Team Black:
-          div#black
-          div#black-score
-        br
-        span Team Yellow:
-          div#yellow
-          div#yellow-score
-        br
+table
+ tr
+  td#black
+   h2 Team Black
+   h3
+   div
+   div#black-score.do-splitflap 0
+  td#yellow
+   h2 Team Yellow
+   h3
+   div#yellow
+   div#yellow-score.do-splitflap 0
+   div#sound
         

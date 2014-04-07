@@ -45,6 +45,7 @@ table {
 td {
 	width:450px;
 	text-align:center;
+	vertical-align: top;
 }
 
 
@@ -53,3 +54,7 @@ h2 {
 	margin-bottom:10px;
 	padding-bottom:0px;
 }
+
+/*img{
+	max-width: 200px;
+}*/

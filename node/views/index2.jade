@@ -1,12 +1,14 @@
 DOCTYPE HTML
 html
 	head		
-		link(rel="stylesheet',href='/css/layout.css')
+		link(rel='stylesheet', href='/css/layout.css')
+		script(src='/js/socket.io.min.js')
+	    script(src='/js/jquery-1.9.1.min.js')
+	    script(src='/js/index.js')
+		script(src='/js/Core.js')
+		script(src='/js/jquery.splitflap.js')
+		script(src='/js/main.js')
 		title ASSWARP SCOREBOARD
-		script(src='/js/jquery-1.9.1.min.js')
-		script(src='/js/Core.js"/script
-		script(src='/js/jquery.splitflap.js"/script
-		script(src='/js/main.js"/script
 body
 	table
 		tr
@@ -14,11 +16,10 @@ body
 				h2 Team Black
 				h3
 				div.do-splitflap 0
-			/td
+			
 			td#team2
 				h2 Team Yellow
 				h3
 				div.do-splitflap 0       			
 				
-	button onclick="$('#team1 .do-splitflap').splitFlap('1');"Test1/button
-	button onclick="$('#team1 .do-splitflap').splitFlap('2');"Test2/button
+	

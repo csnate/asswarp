@@ -39,10 +39,17 @@ function init() {
    the teams section and display the connected teams.   
    */
   socket.on('goal', function (data) {
-    $('#'+ data.team + '-score').html(data.goals);
+    //$('#'+ data.team + '-score').html(data.goals);    
+    $('#'+ data.team + '-score').splitFlap(data.goals.toString());
+    var url = 'http://www.mediacollege.com/downloads/sound-effects/audience/cheer-03.wav';
+    $('#sound').html("<embed src='"+url+"' hidden=true autostart=true loop=false>");
   });
 
-
+  socket.on('win', function (data) {
+  	
+     $('#'+ data.team + '-score').html('<img style="height:201px; width:243px; margin-top: 100px;" src="\images\\fireworksanimated.gif">');
+     //$('#'+ data.team + '-score').splitFlap('W');
+  });
   
   /*
    Log an error if unable to connect to server
@@ -56,10 +63,10 @@ function init() {
     console.log(teams);
     $('#black').html('');
     $('#yellow').html('');
-    for (var i = 0; i < teams.length; i++) {
-      $('#'+teams[i].name).append('<span id="' + teams[i].name + '">' +
-        teams[i].members[0] + ' AND ' + teams[i].members[1] + '<br /></span>');
-    }
+    // for (var i = 0; i < teams.length; i++) {
+      // $('#'+teams[i].name).append('<span id="' + teams[i].name + '">' +
+        // teams[i].members[0] + ' AND ' + teams[i].members[1] + '<br /></span>');
+    // }
   }
   
 }
