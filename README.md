@@ -3,9 +3,11 @@ ASSWARP
 
 Automatic Scoring System With A Raspberry Pi
 
-We connected 2 vibration sensors to the underside of the goals of a Tornado foosball table, sent the signals with pull down resistors (1 M) to a MCP3002 Analog to Digital Converter (ADC), then sent those signals to the SPI interface of a Raspberry Pi.  The code to read signals from the ADC for the Raspberry Pi is contained in the "controller" folder. 
+We connected 2 vibration sensors to the underside of the goals of a Tornado foosball table, sent the signals with pull down resistors (1 M) to a MCP3002 Analog to Digital Converter (ADC), then sent those signals to the SPI interface of a Raspberry Pi. The code to read signals from the ADC for the Raspberry Pi is contained in the "controller" folder. 
 
-When a goal is scored, a request is made to a Node JS server, which then displays the current teams' score using Jade.  The code for the Node server and the Jade template is in the "node" fodler.
+When a goal is scored, a request is made to a Node JS server, which then displays the current teams' score using Jade. The code for the Node server and the Jade template is in the "node" folder.
+
+This project was done for the comScore Hackathon 2014. See the results [here](https://www.youtube.com/watch?v=mbUwKmpivMs).
 
 High Level Overview
 --------------
